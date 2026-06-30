@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_firebase/auth_service.dart';
 import 'package:flutter_firebase/crud_service.dart';
+import 'Login.dart';
 
 class HomePage extends StatelessWidget {
   final CrudService service = CrudService();
@@ -17,6 +19,20 @@ class HomePage extends StatelessWidget {
         title: const Text('Flutter Firebase CRUD | Barrios'),
         centerTitle: true,
         backgroundColor: Colors.teal,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              AuthService().signOut();
+              // Handle logout logic here
+              // For example, you can navigate to the login page
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => LoginPage()),
+              );
+            },
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
